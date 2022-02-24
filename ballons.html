@@ -1,0 +1,83 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random balloons clicker</title>
+</head>
+
+<body>
+    <style>
+        * {
+            margin: 0;
+            width: fit-content;
+        }
+
+        .img {
+            width: 100px;
+            height: auto;
+        }
+
+        .divBallon {
+            position: absolute;
+            cursor: pointer;
+        }
+
+        .unselectable {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
+    <script>
+        function putBallonsScreen(n = 1) {
+            let ids = []
+
+            for (let index = 0; index < n; index++) {
+
+                let min = 0
+                let max = 10000
+
+                let minh = 0
+                let maxh = 93
+
+                let minv = 0
+                let maxv = 82
+
+                do {
+                    id = Math.floor(Math.random() * (max - min) + min)
+                    console.log(id, id in ids)
+                } while (id in ids)
+
+                ids.push(id)
+
+                h = Math.floor(Math.random() * (maxh - minh) + minh)
+                v = Math.floor(Math.random() * (maxv - minv) + minv)
+
+                let divBallon = document.createElement('div')
+
+                divBallon.id = id
+                divBallon.setAttribute("onclick", `{document.getElementById(${id}).remove(); console.log(${id})}`);
+                divBallon.classList.add('divBallon')
+                divBallon.classList.add('unselectable')
+                divBallon.style = `top:${v}vh;left:${h}vw;`
+                divBallon.innerHTML = '<img class="img" src="https://img.icons8.com/emoji/256/-emoji-heart-balloon.png">'
+
+                console.log(divBallon)
+
+                document.body.appendChild(divBallon)
+            }
+        }
+
+        window.onload = () => {
+            putBallonsScreen(10)
+        }
+
+    </script>
+</body>
+
+</html>
