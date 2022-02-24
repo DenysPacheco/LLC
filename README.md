@@ -1,3 +1,3 @@
-# LLC ❤️ - Little Lovely Code
+# LLC ❤️ - Lovely Little Code
 
-Little random codes that are fun.
+Little random codes that are fun to make.
