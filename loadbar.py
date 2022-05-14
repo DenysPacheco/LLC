@@ -43,18 +43,16 @@ def lprint(percentage: float, text: str = 'Loading: ', show: bool = False, color
     size = os.get_terminal_size().columns
     str_jump = ' ' * size
 
-    string_percentage = str(round(percentage*100)) + '%' if show else ''
+    string_percentage = (str(round(percentage*100)) + '%') if show else ''
     size_load = size - len(text) - len(sep) - \
         len(string_percentage) - 2
 
     if colors:
-
         if percentage < 1:
             color_percentage = Fore.YELLOW
         else:
             color_percentage = Fore.GREEN
 
-    if colors:
         loadbar = color_percentage + text + sep[0] + (char_load * int(size_load * percentage)) + \
             (char_unload * int(size_load * (1-percentage))) + \
             sep[1] + Fore.RESET
@@ -69,30 +67,28 @@ def lprint(percentage: float, text: str = 'Loading: ', show: bool = False, color
 
     try:
         print(loadbar, end='\r')
+        if percentage == 1:
+            print()
         sleep(.1)  # to see it more slowly
     except KeyboardInterrupt:
-        fprint('Exit by keyboard canceling!')
+        print()
+        fprint(Fore.RED + 'Error: Exit by keyboard canceling!' + Fore.RESET)
         exit(-1)
 
 
 for x in range(0, 101):
-    if x % 5 == 0:
 
+    if x % 5 == 0:
         fprint('{} is a 5 divider!'.format(x))
 
-    div_five = 'True' if x % 5 == 0 else 'False'
+    # div_five = x % 5 == 0
 
-    string_loading = ''
+    lprint(x/100, show=True, colors=True,
+           sep=['[', ']'], char_load='#', char_unload='.')
 
-    string_loading += 'Loading: '
-
-    lprint(x/100, string_loading, True, True, ['[', ']'], '#', '.')
-
-
-print()
-
-# print a lone line at end for the '\r' in the code,
-# so that new line doesn't get eaten
 
 # try to resolve the '\r' problem with the carrier always at the start of line
 # without the '\r' -> print line + spaces -> print load bar (causes blink effect)
+
+# Something is causing some double char '%' at some parts
+# Cause of the redraw?
