@@ -1,4 +1,5 @@
 import os
+import sys
 from time import sleep
 from colorama import Fore
 
@@ -45,7 +46,7 @@ def lprint(percentage: float, text: str = 'Loading: ', show: bool = False, color
 
     string_percentage = (str(round(percentage*100)) + '%') if show else ''
     size_load = size - len(text) - len(sep) - \
-        len(string_percentage) - 2
+        len(string_percentage) - 1
 
     if colors:
         if percentage < 1:
@@ -80,12 +81,13 @@ for x in range(0, 101):
 
     if x % 5 == 0:
         fprint('{} is a 5 divider!'.format(x))
-
     # div_five = x % 5 == 0
 
     lprint(x/100, show=True, colors=True,
-           sep=['[', ']'], char_load='#', char_unload='.')
+           sep=['|', '|'], char_load='▓', char_unload='░')
 
+# Especial char: ▓ and unloaded: ' ' (space)
+# or load_char: ▓ and unload_char: ░
 
 # try to resolve the '\r' problem with the carrier always at the start of line
 # without the '\r' -> print line + spaces -> print load bar (causes blink effect)
