@@ -12,7 +12,6 @@ def depth(arr):
     if not arr: return 0
     if isinstance(arr, list):
         print('map', arr, *map(depth, arr))
-        #return 1 + max(depth(item) for item in arr)
         return 1 + max(map(depth, arr))
     else:
         return 0

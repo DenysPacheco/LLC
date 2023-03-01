@@ -2,6 +2,11 @@ import hashlib
 import time
 import random
 
+# Simple hash value
+
+def hashy(value):
+    return hashlib.sha256(str(value).encode()).hexdigest()
+
 
 # ⚠️ I know 'random.random()' is faster and better for just 6 digits codes over 10**9 runs but I wanted to implement something based on time and changeable between calls
 
