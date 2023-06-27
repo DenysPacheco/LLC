@@ -9,7 +9,7 @@ def splitList(n: int) -> int:
 
 def solve(n: int) -> int:
     occ = []
-    if n == 0: return 1
+    if n == 0 or n == 1: return 1
     while n not in occ:
         occ.append(n)
         n = splitList(n)
@@ -17,6 +17,7 @@ def solve(n: int) -> int:
 
 print(solve(16)) #9
 print(solve(0)) #1
+print(solve(1)) #1
 
 occ = list(map(solve, range(100)))
 mega = max(occ)
